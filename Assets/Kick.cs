@@ -2,15 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AddForce : StateMachineBehaviour
+public class Kick : StateMachineBehaviour
 {
-
-    private Rigidbody rb;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       rb = animator.GetComponent<Rigidbody>();
-       rb.AddForce((-animator.transform.forward+new Vector3(0,10,0))*10f,ForceMode.Impulse);
+    CharacterMovement.instance.kick=true;    
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -22,7 +19,7 @@ public class AddForce : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-      animator.SetBool("Kicked",false);
+    CharacterMovement.instance.kick=false;    
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -81,6 +81,7 @@ public class CharacterMovement : MonoBehaviour
         else
         {
             kickCoolDown = 0;
+           
         }
 
         #endregion
@@ -178,12 +179,12 @@ public class CharacterMovement : MonoBehaviour
 
     public void Kick()
     {
-        if (Input.GetKeyDown(KeyCode.Q)&& kickCoolDown>3f)
+        if (Input.GetKeyDown(KeyCode.Q) && kickCoolDown>3f)
         {
-            kick = true;
+            
             animator.SetTrigger("Kick");
         }
-       
+        
         
         
     }

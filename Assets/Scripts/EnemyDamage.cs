@@ -30,7 +30,7 @@ public class EnemyDamage : MonoBehaviour
 
   void Update()
   {
-    
+
     LifeCheck();
 
     if (player != null)
@@ -99,11 +99,14 @@ public class EnemyDamage : MonoBehaviour
       inFightArea = true;
     }
 
-    if(other.gameObject.tag == "Foot" && CharacterMovement.instance.kick==true)
-    {
-       animator.SetTrigger("Kicked");
-       CharacterMovement.instance.kick = false;
-    }
+
+    
+      if (other.gameObject.tag == "Foot" && CharacterMovement.instance.kick == true)
+      {
+        animator.SetBool("Kicked",true);
+      }
+      
+    
   }
 
 
