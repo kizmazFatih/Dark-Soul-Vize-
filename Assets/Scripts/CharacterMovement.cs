@@ -17,11 +17,13 @@ public class CharacterMovement : MonoBehaviour
     private bool block = false;
     public bool covering = false;
     private bool running = false;
+    
+    public bool kick = false;
 
    
 
 
-
+    public float kickCoolDown;
     public float coolDown;
     public float speed = 5f;
     public float turnSmoothTime = 0.1f;
@@ -62,7 +64,7 @@ public class CharacterMovement : MonoBehaviour
         Kick();
 
 
-        #region Attack Cool Down
+        #region Cool Down
         if (!attack)
         {
             coolDown += 1 * Time.deltaTime;
@@ -71,6 +73,16 @@ public class CharacterMovement : MonoBehaviour
         {
             coolDown = 0;
         }
+        
+        if (!kick)
+        {
+            kickCoolDown += 1 * Time.deltaTime;
+        }
+        else
+        {
+            kickCoolDown = 0;
+        }
+
         #endregion
 
         #region UpdateAnimatorVariables
@@ -166,10 +178,13 @@ public class CharacterMovement : MonoBehaviour
 
     public void Kick()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q)&& kickCoolDown>3f)
         {
+            kick = true;
             animator.SetTrigger("Kick");
         }
+       
+        
         
     }
 

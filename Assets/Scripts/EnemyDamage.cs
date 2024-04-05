@@ -99,9 +99,10 @@ public class EnemyDamage : MonoBehaviour
       inFightArea = true;
     }
 
-    if(other.gameObject.tag == "Foot" && Kick.instance.kick==true){
+    if(other.gameObject.tag == "Foot" && CharacterMovement.instance.kick==true)
+    {
        animator.SetTrigger("Kicked");
-       Kick.instance.kick = false;
+       CharacterMovement.instance.kick = false;
     }
   }
 
