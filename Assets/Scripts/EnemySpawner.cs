@@ -8,6 +8,8 @@ public class EnemySpawner : MonoBehaviour
     public static EnemySpawner instance;
     public GameObject enemyPrefab;
 
+    private Vector3[] spawnPoints;
+
     public bool isDead = false;
 
     public int spawnedEnemyCount = 0;
@@ -28,6 +30,16 @@ public class EnemySpawner : MonoBehaviour
     }
 
 
+    void Start(){
+        spawnPoints = new Vector3[4];
+
+        spawnPoints[0] = new Vector3(86,1,53);
+        spawnPoints[1] = new Vector3(15,1,53);
+        spawnPoints[2] = new Vector3(50,1,86);
+        spawnPoints[3] = new Vector3(50,1,15);
+    }
+
+
     void Update()
     {
 
@@ -36,7 +48,7 @@ public class EnemySpawner : MonoBehaviour
         {
             if (activeEnemyCount < 2)
             {
-                Vector3 spawnPoint = new Vector3(Random.Range(-24, 24), 1, Random.Range(-24, 24));
+                Vector3 spawnPoint = spawnPoints[Random.Range(0,spawnPoints.Length)];
                 Instantiate(enemyPrefab, spawnPoint, Quaternion.identity);
 
                 activeEnemyCount += 1;

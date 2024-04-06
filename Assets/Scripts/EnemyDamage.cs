@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
+using UnityEngine.UI;
 
 
 
@@ -16,7 +18,7 @@ public class EnemyDamage : MonoBehaviour
   private Animator animator;
   private Transform player;
 
-
+  public UnityEngine.UI.Image healthBar;
 
 
   public bool isDead;
@@ -24,13 +26,14 @@ public class EnemyDamage : MonoBehaviour
 
   void Start()
   {
+    
     animator = this.gameObject.GetComponent<Animator>();
     player = GameObject.FindGameObjectWithTag("Player").transform;
   }
 
   void Update()
   {
-
+    UpdateBar();
     LifeCheck();
 
     if (player != null)
@@ -77,6 +80,12 @@ public class EnemyDamage : MonoBehaviour
     Destroy(this.gameObject);
   }
 
+  void UpdateBar()
+  {
+    healthBar.rectTransform.sizeDelta = new Vector2((health * 593) / 100, healthBar.rectTransform.sizeDelta.y);
+
+  }
+
 
   void OnTriggerEnter(Collider other)
   {
@@ -100,13 +109,13 @@ public class EnemyDamage : MonoBehaviour
     }
 
 
-    
-      if (other.gameObject.tag == "Foot" && CharacterMovement.instance.kick == true)
-      {
-        animator.SetBool("Kicked",true);
-      }
-      
-    
+
+    if (other.gameObject.tag == "Foot" && CharacterMovement.instance.kick == true)
+    {
+      animator.SetBool("Kicked", true);
+    }
+
+
   }
 
 

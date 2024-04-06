@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterHealth : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class CharacterHealth : MonoBehaviour
   public float health = 100f;
 
   public static CharacterHealth instance;
+
+  public Image healthBar;
+
+
 
   void Awake()
   {
@@ -20,6 +25,10 @@ public class CharacterHealth : MonoBehaviour
     {
       Destroy(this);
     }
+  }
+
+  void Update(){
+    UpdateBar();
   }
   void OnTriggerEnter(Collider other)
   {
@@ -58,5 +67,9 @@ public class CharacterHealth : MonoBehaviour
 
       takeDamage = false;
     }
+  }
+
+  void UpdateBar(){
+      healthBar.rectTransform.sizeDelta = new Vector2((health*593)/100,healthBar.rectTransform.sizeDelta.y);
   }
 }
